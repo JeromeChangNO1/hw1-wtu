@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+    <name>hw1-wtu-typesystem</name>
+    <description>This is the type system for 11791-hw1.</description>
+    <version>1.0</version>
+    <vendor>Wenlong Tu</vendor>
+  <types>
+    <typeDescription>
+      <name>cmu.edu.iis.wtu.model.BaseAnnotation</name>
+      <description>Base type for annotation</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>source</name>
+          <description>The source of the annotation. It's used for track where the annotation made by.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>confidence</name>
+          <description>This is the confidence of the annotation. It helps to use the annotation more carefully.</description>
+          <rangeTypeName>uima.cas.Float</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>cmu.edu.iis.wtu.model.Token</name>
+      <description>This is the representation of tokens. It may contains 1 or more words, depending on the annotator.</description>
+      <supertypeName>cmu.edu.iis.wtu.model.BaseAnnotation</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>cmu.edu.iis.wtu.model.Sentence</name>
+      <description>This is the base type for both question and answer.</description>
+      <supertypeName>cmu.edu.iis.wtu.model.BaseAnnotation</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>cmu.edu.iis.wtu.model.Question</name>
+      <description>This is the representation of Question.</description>
+      <supertypeName>cmu.edu.iis.wtu.model.Sentence</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>cmu.edu.iis.wtu.model.Answer</name>
+      <description>This is the representation of an answer.</description>
+      <supertypeName>cmu.edu.iis.wtu.model.Sentence</supertypeName>
+      <features>
+        <featureDescription>
+          <name>isCorrect</name>
+          <description>It shows whether the answer is correct or not. 1 - correct ; 0 - not correct.</description>
+          <rangeTypeName>uima.cas.Boolean</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>cmu.edu.iis.wtu.model.SetenceWithTokens</name>
+      <description>A setence along with its token list.</description>
+      <supertypeName>cmu.edu.iis.wtu.model.BaseAnnotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>sentence</name>
+          <description>The sentence contents.</description>
+          <rangeTypeName>cmu.edu.iis.wtu.model.Sentence</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>tokenList</name>
+          <description>The tokens that belongs to the sentence.</description>
+          <rangeTypeName>uima.cas.FSArray</rangeTypeName>
+          <elementType>cmu.edu.iis.wtu.model.Token</elementType>
+        </featureDescription>
+      <featureDescription>
+          <name>isAnswer</name>
+          <description>This is the tag to distinguish question and answers. 0 for the question and 1 for the answers.</description>
+          <rangeTypeName>uima.cas.Boolean</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>cmu.edu.iis.wtu.model.NGram</name>
+      <description>This is a representation of NGram.</description>
+      <supertypeName>cmu.edu.iis.wtu.model.BaseAnnotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>tokens</name>
+          <description>The tokens that belongs to the NGram.</description>
+          <rangeTypeName>uima.cas.FSArray</rangeTypeName>
+          <elementType>cmu.edu.iis.wtu.model.Token</elementType>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>cmu.edu.iis.wtu.model.SentenceWithNGram</name>
+      <description>A setence along with its ngram list.</description>
+      <supertypeName>cmu.edu.iis.wtu.model.BaseAnnotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>sentence</name>
+          <description>The sentence content.</description>
+          <rangeTypeName>cmu.edu.iis.wtu.model.Sentence</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>ngramList</name>
+          <description>The ngrams that are belong to the sentence.</description>
+          <rangeTypeName>uima.cas.FSArray</rangeTypeName>
+          <elementType>cmu.edu.iis.wtu.model.NGram</elementType>
+        </featureDescription>
+      <featureDescription>
+          <name>isAnswer</name>
+          <description>This is a tag to distinguish question and answers. 0 for the question and 1 for answers.</description>
+          <rangeTypeName>uima.cas.Boolean</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>cmu.edu.iis.wtu.model.AnswerWithScore</name>
+      <description>An answer along with all of its score.</description>
+      <supertypeName>cmu.edu.iis.wtu.model.BaseAnnotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>answer</name>
+          <description>The scored answer.</description>
+          <rangeTypeName>cmu.edu.iis.wtu.model.Answer</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>scores</name>
+          <description>The scores of this answer that were made by different scorers.</description>
+          <rangeTypeName>uima.cas.FSArray</rangeTypeName>
+          <elementType>cmu.edu.iis.wtu.model.Score</elementType>
+        </featureDescription>
+        <featureDescription>
+          <name>finalScore</name>
+          <description>The final score of this sentence.</description>
+          <rangeTypeName>uima.cas.Float</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>cmu.edu.iis.wtu.model.Score</name>
+      <description>A score for an answer made by a specific scorer.</description>
+      <supertypeName>uima.cas.TOP</supertypeName>
+      <features>
+        <featureDescription>
+          <name>source</name>
+          <description>The scorer's name.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>value</name>
+          <description>the value of this score.</description>
+          <rangeTypeName>uima.cas.Float</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>weight</name>
+          <description>The weight of this score in the total score.</description>
+          <rangeTypeName>uima.cas.Float</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>cmu.edu.iis.wtu.model.Result</name>
+      <description>The evaluation result, including the top N answers and the precision.</description>
+      <supertypeName>cmu.edu.iis.wtu.model.BaseAnnotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>sortedAnswer</name>
+          <description>The sorted answer list.</description>
+          <rangeTypeName>uima.cas.FSArray</rangeTypeName>
+          <elementType>cmu.edu.iis.wtu.model.AnswerWithScore</elementType>
+        </featureDescription>
+        <featureDescription>
+          <name>precision</name>
+          <description>The precision of this evaluation.</description>
+          <rangeTypeName>uima.cas.Float</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  </types>
+</typeSystemDescription>
